@@ -21,25 +21,30 @@ public class OrderedList {
     public void add(int num) {
         //start at beginning of list
         IntNode node = head;
+        //create the new node
+        IntNode temp = new IntNode(num);
         //see if it is the first item
         if (node == null) {
-            IntNode temp = new IntNode(num);
             head = temp;
-            System.out.println("added");
-        } else {
-            //travel to end
+            System.out.println("added 1");
+            //check to see if the num in question is less than the head
+        } else if(num < node.getNum()){
+            //therefore it needs to go at the very front of the line
+            temp.setNext(node);
+            head = temp;
+            System.out.println("added 2");
+        }else{
+            //travel through to the end
             while (node.getNext() != null) {
                 //check this position's number with the number we are trying to insert
                 if (num < node.getNext().getNum()) {
-                    //create the new node
-                    IntNode temp = new IntNode(num);
                     //insert it into the list
                     //set this new nodes's pointer to the next node in line
                     temp.setNext(node.getNext());
                     //now set the current-node-in-question's pointer to this new node
                     node.setNext(temp);
                     
-                    System.out.println("added");
+                    System.out.println("added 3");
                     //break the while loop
                     break;
                 }
@@ -108,8 +113,10 @@ public class OrderedList {
         OrderedList list = new OrderedList();
         list.add(2);
         list.add(-5);
+        list.add(3);
+        list.add(4);
         for (int i = 0; i < list.size(); i++) {
-            //System.out.println(list.get(i));
+            System.out.println(list.get(i));
         }
     }
 }
