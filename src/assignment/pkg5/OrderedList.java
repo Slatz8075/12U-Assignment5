@@ -26,13 +26,11 @@ public class OrderedList {
         //see if it is the first item
         if (node == null) {
             head = temp;
-            System.out.println("added 1");
             //check to see if the num in question is less or equal to the head than the head
         } else if (num <= head.getNum()) {
             //therefore it needs to go at the very front of the line
             temp.setNext(head);
             head = temp;
-            System.out.println("added 2");
         } else {
             //travel through to the end
             while (true) {
@@ -46,8 +44,6 @@ public class OrderedList {
                     }
                     //now set the current-node-in-question's pointer to this new node
                     node.setNext(temp);
-
-                    System.out.println("added 3");
                     //break the while loop
                     break;
                 }
@@ -62,10 +58,10 @@ public class OrderedList {
     public void remove(int num) {
         //start at beginning of list
         IntNode node = head;
+        //keep a integer to store which node we are on
+        int pos = 0;
         //create a while loop to go through checking and advancing
         while (true) {
-            //keep a integer to store which node we are on
-            int pos = 0;
             //check to see if this node's number is the number the user it looking for
             if (node.getNum() == num) {
                 //it is so remove it from the list
@@ -100,10 +96,12 @@ public class OrderedList {
                     //we can start at the head
                     node = head;
                     //and use a for loop to advance up until the item we want to delete
-                    for(int i = 0; i < pos - 1; i++){
+                    for(int i = 0; i < pos-1; i++){
                         //move to the next node in line
                         node = node.getNext();
+                        System.out.println("for loop triggered");
                     }
+                    System.out.println("Position: " + pos);
                     //now we know that the next node in line is to be deleted
                     //so set the pointer to the node after the next one
                     node.setNext(node.getNext().getNext());
@@ -122,7 +120,6 @@ public class OrderedList {
             node = node.getNext();
             //also update which node we are on
             pos++;
-            System.out.println(pos);
         }
     }
 
@@ -148,12 +145,22 @@ public class OrderedList {
      */
     public static void main(String[] args) {
         OrderedList list = new OrderedList();
+        System.out.println("Adding...");
         list.add(2);
         list.add(-5);
         list.add(4);
         list.add(3);
-        
+        list.add(0);
+        list.add(3);
+        list.add(-2);
+        System.out.println("The List: ");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        list.remove(-5);
         list.remove(2);
+        list.remove(4);
+        System.out.println("Removed -5, 2 and 4");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
