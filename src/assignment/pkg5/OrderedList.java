@@ -36,13 +36,7 @@ public class OrderedList {
         } else {
             //travel through to the end
             while (true) {
-                if (node.getNext() == null) {
-                    System.out.println(node.getNext().getNum());
-                } else {
-                    System.out.println("null");
-                }
                 //check this position's number with the number we are trying to insert
-                //PROBLEM WITH THE .GETNUM HERE - it might be null
                 if (node.getNext() == null || num <= node.getNext().getNum()) {
                     //insert it into the list
                     //set this new nodes's pointer to the next node in line, as long as it is not the end of the line
@@ -57,8 +51,6 @@ public class OrderedList {
                     //break the while loop
                     break;
                 }
-
-
                 //the if statement hasn't triggered so travel to the next node
                 node = node.getNext();
             }
@@ -67,38 +59,73 @@ public class OrderedList {
         numItems++;
     }
 
-    /*
-     public void remove(int num) {
-     //if removeing from start
-     if (pos == 0) {
-     head = head.getNext();
-     } else if (pos == numItems - 1) {
-     //removeing from the end
-     IntNode node = head;
-     //moveing to the 2nd last item
-     for (int i = 0; i < numItems - 1; i++) {
-     node = node.getNext();
-     }
-     //sever the link
-     node.setNext(null);
-     } else {
-     IntNode node = head;
-     //move to the spot just before
-     for (int i = 0; i < pos - 1; i++) {
-     node = node.getNext();
-     }
-     //the node to remove
-     IntNode toRemove = node.getNext();
-     //its next node
-     IntNode next = toRemove.getNext();
-     //set all the links
-     node.setNext(next);
-     toRemove.setNext(null);
-     }
-     numItems--;
-     }
+    public void remove(int num) {
+        //start at beginning of list
+        IntNode node = head;
+        //create a while loop to go through checking and advancing
+        while (true) {
+            //keep a integer to store which node we are on
+            int pos = 0;
+            //check to see if this node's number is the number the user it looking for
+            if (node.getNum() == num) {
+                //it is so remove it from the list
+                //check the special case where it is at the beginning of the list
+                if (node == head) {
+                    //just set the head to be the next node in line
+                    head = node.getNext();
+                    //subtract one from the list count
+                    numItems--;
+                    //and break the loop
+                    break;
+                    //now check the case where the node is at the end
+                }else if (node.getNext() == null) {
+                    //we know that this node is the number of items in the list - 1
+                    //so start at the beginning of the list again
+                    node = head;
+                    //now use a for loop to move through the list until we are just infront of the item we want to delete
+                    for (int i = 0; i < numItems - 1; i++) {
+                        //move forward
+                        node = node.getNext();
+                    }
+                    //now we are just infront of the item we want to delete
+                    //so set its pointer to null
+                    node.setNext(null);
+                    //subtract one from the list count
+                    numItems--;
+                    //and break the loop
+                    break;
+                    //therefore the num is between the front and the end of the list
+                } else {
+                    //since we have kept track of which node we are on with the pos variable
+                    //we can start at the head
+                    node = head;
+                    //and use a for loop to advance up until the item we want to delete
+                    for(int i = 0; i < pos - 1; i++){
+                        //move to the next node in line
+                        node = node.getNext();
+                    }
+                    //now we know that the next node in line is to be deleted
+                    //so set the pointer to the node after the next one
+                    node.setNext(node.getNext().getNext());
+                    //subtract one from the list count
+                    numItems--;
+                    //and break the loop
+                    break;
+                }
+            }
+            //check to see if we have made it to the end of the list
+            if(node.getNext() == null){
+                //we are so break out of the loop
+                break;
+            }
+            //we have not yet found our number to continue advancing through the list
+            node = node.getNext();
+            //also update which node we are on
+            pos++;
+            System.out.println(pos);
+        }
+    }
 
-     */
     public int size() {
         return numItems;
     }
@@ -123,8 +150,10 @@ public class OrderedList {
         OrderedList list = new OrderedList();
         list.add(2);
         list.add(-5);
-        list.add(3);
         list.add(4);
+        list.add(3);
+        
+        list.remove(2);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
