@@ -34,11 +34,15 @@ public class ResizeableArray {
             int[] arrayTemp = new int[array.length*2];
             //transfer the numbers of the first array to this new one using a for loop 
             for(int pos = 0; pos < numItems; pos++){
-                
+                //transfer this position's number to the new array
+                array[pos] = arrayTemp[pos]; 
             }
-            
-            //finally add the item to this array
+            //rename the new array 
+            arrayTemp = array;
         }
+        //now add the item to the array
+         
+                //ITEMS BEING SHUFFLED DOWN THE LIST IS REQUIRED
     }
     
     //REMOVE
@@ -61,7 +65,7 @@ public class ResizeableArray {
     //GET
     public int get(int index){
         //tell the user the number at this position
-        return resizableArray[index];
+        return array[index];
     }
     
     
