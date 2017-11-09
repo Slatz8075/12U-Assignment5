@@ -28,6 +28,11 @@ public class ResizeableArray {
     
     //ADDING
     public void add(int index, int num){
+        //check to see if the index position is greater than the length of the array
+        if(index > numItems+1){
+            //it is so interpret this at being the last position 
+            index = numItems + 1;
+        }
         //check to see if adding a number to the array will exceed the length of the array
         if(numItems + 1 > array.length){
             //it is so create a new array twice the length of the current array
@@ -41,8 +46,16 @@ public class ResizeableArray {
             arrayTemp = array;
         }
         //now add the item to the array
-         
-                //ITEMS BEING SHUFFLED DOWN THE LIST IS REQUIRED
+        //shift the items down the line using a for loop - starting at the end 
+        for(int pos = numItems; pos > index; pos--){
+            //set this array position's number to the next position's number down the line
+            array[pos+1]= array[pos];
+        }
+        //so now there is an open spot at the index that user wants their number at
+        //so set the position to the num
+        array[index] = num;
+        //add one to item counter
+        numItems++;
     }
     
     //REMOVE
@@ -75,6 +88,20 @@ public class ResizeableArray {
     
     public static void main(String[] args) {
         // create a resizable array
+        ResizeableArray array = new ResizeableArray();
+        //check to see if empty
+        System.out.println("Empty?: " + array.isEmpty());
+        //add numbers
+        System.out.println("Adding...");
+        array.add(0, 1);
+        array.add(1, 2);
+        array.add(3, 3);
+        //print the array
+        for(int i = 0; i < array.size(); i++){
+            System.out.println(array.get(i));
+        }
+        
+        
         
     }
 }
