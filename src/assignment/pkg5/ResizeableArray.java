@@ -29,9 +29,10 @@ public class ResizeableArray {
     //ADDING
     public void add(int index, int num){
         //check to see if the index position is greater than the length of the array
-        if(index > numItems+1){
+        if(index > numItems){
+            System.out.println(" bigger");
             //it is so interpret this at being the last position 
-            index = numItems + 1;
+            index = numItems;
         }
         //check to see if adding a number to the array will exceed the length of the array
         if(numItems + 1 > array.length){
@@ -94,8 +95,10 @@ public class ResizeableArray {
         //add numbers
         System.out.println("Adding...");
         array.add(0, 1);
+        array.add(1, 3);
+        array.add(3, 4);
         array.add(1, 2);
-        array.add(3, 3);
+        array.add(1, 2);
         //print the array
         for(int i = 0; i < array.size(); i++){
             System.out.println(array.get(i));
