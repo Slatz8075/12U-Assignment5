@@ -30,7 +30,6 @@ public class ResizeableArray {
     public void add(int index, int num){
         //check to see if the index position is greater than the length of the array
         if(index > numItems){
-            System.out.println(" bigger");
             //it is so interpret this at being the last position 
             index = numItems;
         }
@@ -48,7 +47,7 @@ public class ResizeableArray {
         }
         //now add the item to the array
         //shift the items down the line using a for loop - starting at the end 
-        for(int pos = numItems; pos > index; pos--){
+        for(int pos = numItems; pos >= index; pos--){
             //set this array position's number to the next position's number down the line
             array[pos+1]= array[pos];
         }
@@ -95,10 +94,19 @@ public class ResizeableArray {
         //add numbers
         System.out.println("Adding...");
         array.add(0, 1);
+        array.add(1, 4);
+        array.add(3, 5);
+        
         array.add(1, 3);
-        array.add(3, 4);
         array.add(1, 2);
-        array.add(1, 2);
+        
+        array.add(5, 0);
+        array.add(6, 0);
+        array.add(7, 0);
+        array.add(8, 0);
+        array.add(9, 0);
+        array.add(10, 0);
+
         //print the array
         for(int i = 0; i < array.size(); i++){
             System.out.println(array.get(i));
