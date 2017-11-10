@@ -28,7 +28,8 @@ public class ResizeableArray {
     
     //ADDING
     public void add(int index, int num){
-        //check to see if the index position is greater than the length of the array
+        System.out.println(num);
+        //check to see if the index position is greater than the number of items recorded in the list
         if(index > numItems){
             //it is so interpret this at being the last position 
             index = numItems;
@@ -40,14 +41,14 @@ public class ResizeableArray {
             //transfer the numbers of the first array to this new one using a for loop 
             for(int pos = 0; pos < numItems; pos++){
                 //transfer this position's number to the new array
-                array[pos] = arrayTemp[pos]; 
+                arrayTemp[pos] = array[pos];
             }
             //rename the new array 
-            arrayTemp = array;
+            array = arrayTemp;
         }
         //now add the item to the array
         //shift the items down the line using a for loop - starting at the end 
-        for(int pos = numItems; pos >= index; pos--){
+        for(int pos = numItems - 1; pos >= index; pos--){
             //set this array position's number to the next position's number down the line
             array[pos+1]= array[pos];
         }
@@ -60,7 +61,13 @@ public class ResizeableArray {
     
     //REMOVE
     public void remove(int index){
-        
+        //shift the items forward into the spot
+        for(int pos = index; pos < numItems; pos++){
+            //set this array position's number to the next position's number down the line
+            array[pos]= array[pos+1];
+        }
+        //update the counte
+        numItems--;
     }
     
     //SIZE ASKING
@@ -106,13 +113,25 @@ public class ResizeableArray {
         array.add(8, 0);
         array.add(9, 0);
         array.add(10, 0);
+        
+        System.out.println("Size: " + array.size());
 
         //print the array
         for(int i = 0; i < array.size(); i++){
             System.out.println(array.get(i));
         }
         
+        System.out.println("removing... 2");
         
+        array.remove(1);
+        
+        //print the array
+        for(int i = 0; i < array.size(); i++){
+            System.out.println(array.get(i));
+        }
+        System.out.println("Size: " + array.size());
+        
+        System.out.println("Get index 3: " + array.get(3));
         
     }
 }
